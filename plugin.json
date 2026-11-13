@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "canopy-rankings",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Review Amazon and Shopify catalog changes and static product listings. Find missing fields, identity changes, price moves and supplied-cost contribution risks. Uses merchant-supplied content; no live Amazon data or store publishing.",
   "author": {
     "name": "Meridian Bridge Advisory LLC",
