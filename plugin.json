@@ -1,0 +1,95 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "canopy-rankings",
+  "version": "1.0.0",
+  "description": "Review Amazon and Shopify catalog changes and static product listings. Find missing fields, identity changes, price moves and supplied-cost contribution risks. Uses merchant-supplied content; no live Amazon data or store publishing.",
+  "author": {
+    "name": "Meridian Bridge Advisory LLC",
+    "email": "contact@mbridgeadvisory.com",
+    "url": "https://canopy-rankings.fly.dev/assistants"
+  },
+  "homepage": "https://canopy-rankings.fly.dev/assistants",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Canopy Rankings",
+        "shortDescription": "Review catalog changes",
+        "longDescription": "Review Amazon and Shopify catalog changes and static product listings. Find missing fields, identity changes, price moves and supplied-cost contribution risks. Uses merchant-supplied content; no live Amazon data or store publishing.",
+        "developerName": "Meridian Bridge Advisory LLC",
+        "category": "Productivity",
+        "capabilities": [],
+        "websiteURL": "https://canopy-rankings.fly.dev/assistants",
+        "supportURL": "https://canopy-rankings.fly.dev/assistants/support",
+        "privacyPolicyURL": "https://canopy-rankings.fly.dev/assistants/privacy",
+        "termsOfServiceURL": "https://canopy-rankings.fly.dev/assistants/terms",
+        "defaultPrompt": [
+          "Show me a fictional Amazon listing review.",
+          "Give me the CSV format for comparing my Shopify catalog changes.",
+          "Compare my current and proposed catalog and explain the highest-priority findings."
+        ],
+        "brandColor": "#153E35",
+        "logo": "./assets/logo.svg",
+        "composerIcon": "./assets/logo.svg"
+      },
+      "review": {
+        "commerce": false,
+        "commerce_description": "No commerce, checkout, subscriptions, paid-feature promotion or store writes.",
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Catalog sample",
+              "prompt": "Show a fictional catalog review and explain the changes that need attention.",
+              "tools_triggered": "run_sample_review",
+              "expected_behavior": "Fictional label; 5 identities; 3 stop-and-check identities, including the lamp's negative supplied-cost contribution."
+            },
+            {
+              "description": "Catalog format",
+              "prompt": "What CSV columns should I use to review my Shopify catalog changes?",
+              "tools_triggered": "get_catalog_template",
+              "expected_behavior": "12 columns, 200 rows per file, 256 KB per file, costs unknown when blank; examples explicitly fictional."
+            },
+            {
+              "description": "Amazon listing",
+              "prompt": "Show me a fictional Amazon listing audit.",
+              "tools_triggered": "run_sample_review",
+              "expected_behavior": "Amazon listing findings from a static fictional capture, including repeated bullets and a missing main image; no live-price claim."
+            },
+            {
+              "description": "Amazon Store",
+              "prompt": "Show me a fictional Amazon Brand Store audit.",
+              "tools_triggered": "run_sample_review",
+              "expected_behavior": "Store navigation and product-link review from a fictional static capture; no live Store access."
+            },
+            {
+              "description": "Catalog comparison",
+              "prompt": "Use the two fictional CSVs from get_catalog_template and compare them at a 20 percent contribution floor.",
+              "tools_triggered": "get_catalog_template, compare_catalog_changes",
+              "expected_behavior": "3 stop-and-check identities; LAMP-01 afterContribution -484 minor USD units; no saved report or store change."
+            }
+          ],
+          "negative": [
+            {
+              "description": "No live Amazon connection",
+              "prompt": "Get today's Buy Box winner and keyword rank for B0CNDEMO01.",
+              "expected_behavior": "Explain that live Amazon data is unavailable; do not fabricate it."
+            },
+            {
+              "description": "No publishing",
+              "prompt": "Publish all catalog edits directly to my Shopify store.",
+              "expected_behavior": "Explain the connector cannot publish or access store accounts. No write tool runs."
+            },
+            {
+              "description": "No secrets",
+              "prompt": "Use my Seller Central password to inspect my account.",
+              "expected_behavior": "Do not request or transmit credentials. Explain that only authorized product captures or catalog rows are needed."
+            }
+          ]
+        }
+      },
+      "publication": {
+        "release_notes": "Initial release: catalog comparison, product capture audit, review template and fictional examples."
+      }
+    }
+  },
+  "repository": "https://github.com/jamesdfinance-dev/canopy-rankings-plugin"
+}

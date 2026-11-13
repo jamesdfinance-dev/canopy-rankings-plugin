@@ -1,0 +1,15 @@
+{
+  "name": "meridian-canopy-rankings",
+  "owner": {
+    "name": "Meridian Bridge Advisory LLC",
+    "email": "contact@mbridgeadvisory.com"
+  },
+  "plugins": [
+    {
+      "name": "canopy-rankings",
+      "source": "./",
+      "description": "Review Amazon and Shopify catalog changes and static product listings. Find missing fields, identity changes, price moves and supplied-cost contribution risks. Uses merchant-supplied content; no live Amazon data or store publishing."
+    }
+  ],
+  "description": "Catalog change and listing reviews from Canopy Rankings."
+}
